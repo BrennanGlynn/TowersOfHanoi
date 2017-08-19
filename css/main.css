@@ -106,6 +106,7 @@ textarea {
 .tower {
     display: flex;
     flex-direction: column-reverse;
+    height: 600px;
 }
 
 .parent {
@@ -115,13 +116,13 @@ textarea {
     margin-top: 50px
 }
 
-.wrapper {
-    text-align: center;
-}
-
 .headContent {
     margin: 0px 20px;
     display: inline-block;
+}
+
+#footer {
+    text-align: center;
 }
 
 #disk0 {

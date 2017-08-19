@@ -11,20 +11,29 @@
         disks: []
     }],
         n = 10,
-        moves = 0;
+        speed = 5,
+        moves = 0,
+        timeouts = [];
 
     initiateGame(n);
 
     $('#create').click(function () {
         n = $('#height').val();
-        console.log(n);
+        clearAll();
         initiateGame(n);
     });
     $('#solve').click(function () {
+        console.log("Towers: " + JSON.stringify(towers));
+        console.log("n: " + n);
+        console.log("speed: " + speed);
+        console.log("moves: " + moves);
+        console.log("timeouts: " + timeouts);
         moveTower(n - 1, 0, 2, 1);
     });
 
     function clearAll() {
+        clearTimeouts(timeouts);
+        moves = 0;
         towers = [{ disks: [] }, { disks: [] }, { disks: [] }];
         $('#tower0').empty();
         $('#tower1').empty();
@@ -32,14 +41,12 @@
     }
 
     function initiateGame(height) {
-        clearAll();
         for (var x = height - 1; x >= 0; x--) {
             towers[0].disks.push(x);
         }
         for (var disc in towers[0].disks) {
             createDisk(disc);
         }
-        console.log(JSON.stringify(towers));
     }
 
     function createDisk(width) {
@@ -52,12 +59,11 @@
     function moveDisk(source, dest) {
         moves += 1;
 
-        setTimeout(function () {
-            var currentMoves = $('#moves').html();
+        timeouts.push(setTimeout(function () {
             var disk = towers[source].disks.pop();
             towers[dest].disks.push(disk);
-            $('#disk' + disk).prependTo($('#tower' + dest)).hide().show(500);
-        }, moves * 1000);
+            $('#disk' + disk).prependTo($('#tower' + dest)).hide().show(500 / speed);
+        }, moves * 1000 / speed));
     }
 
     function moveTower(diskValue, source, dest, spare) {
@@ -68,6 +74,13 @@
             moveDisk(source, dest);
             moveTower(diskValue - 1, spare, dest, source);
         }
+    }
+
+    function clearTimeouts(timeoutArray) {
+        for (var i = 0; i < timeoutArray.length; i++) {
+            clearTimeout(timeoutArray[i]);
+        }
+        timeouts = [];
     }
 })();
 //# sourceMappingURL=main.js.map
