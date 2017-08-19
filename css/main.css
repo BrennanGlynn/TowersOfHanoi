@@ -97,9 +97,82 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.disk {
+    height: 50px;
+    margin: auto;
+    border: 2px solid black;
+}
 
+.tower {
+    display: flex;
+    flex-direction: column-reverse;
+}
 
+.parent {
+    text-align: center;
+    display: inline-block;
+    width: 30%;
+    margin-top: 50px
+}
 
+.wrapper {
+    text-align: center;
+}
+
+.headContent {
+    margin: 0px 20px;
+    display: inline-block;
+}
+
+#disk0 {
+    background-color: red;
+    width: 10%
+}
+
+#disk1 {
+    background-color: orange;
+    width: 20%;
+}
+
+#disk2 {
+    background-color: yellow;
+    width: 30%;
+}
+
+#disk3 {
+    background-color: green;
+    width: 40%;
+}
+
+#disk4 {
+    background-color: blue;
+    width: 50%;
+}
+
+#disk5 {
+    background-color: indigo;
+    width: 60%;
+}
+
+#disk6 {
+    background-color: violet;
+    width: 70%;
+}
+
+#disk7 {
+    background-color: pink;
+    width: 80%;
+}
+
+#disk8 {
+    background-color: peachpuff;
+    width: 90%;
+}
+
+#disk9 {
+    background-color: gray;
+    width: 100%;
+}
 
 
 

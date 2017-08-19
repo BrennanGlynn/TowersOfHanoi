@@ -7,24 +7,54 @@
     },{
         disks: []
     }],
-        n = 9
+        n = 10,
+        moves = 0
 
     initiateGame(n)
-    moveTower(n - 1, 0, 2, 1)
 
+    $('#create').click(function () {
+        n = $('#height').val()
+        console.log(n)
+        initiateGame(n)
+    })
+    $('#solve').click(function () {
+        moveTower(n - 1, 0, 2, 1)
+    })
 
+    function clearAll() {
+        towers = [{disks: []}, {disks: []}, {disks: []}]
+        $('#tower0').empty()
+        $('#tower1').empty()
+        $('#tower2').empty()
+    }
 
     function initiateGame(height) {
+        clearAll()
         for (let x = height - 1; x >= 0; x--) {
             towers[0].disks.push(x)
+        }
+        for (let disc in towers[0].disks) {
+            createDisk(disc)
         }
         console.log(JSON.stringify(towers))
     }
 
+    function createDisk(width) {
+        let disk = document.createElement('div')
+        disk.setAttribute('id', "disk" + width)
+        disk.setAttribute('class', 'disk')
+        document.getElementById('tower0').append(disk)
+    }
+
     function moveDisk(source, dest) {
-        let disk = towers[source].disks.pop()
-        towers[dest].disks.push(disk)
-        console.log(JSON.stringify(towers))
+        moves += 1
+
+        setTimeout(function () {
+            let currentMoves = $('#moves').html()
+            let disk = towers[source].disks.pop()
+            towers[dest].disks.push(disk)
+            $('#disk' + disk).prependTo($('#tower' + dest)).hide().show(500)
+        }, moves * 1000)
     }
 
     function moveTower(diskValue, source, dest, spare) {
